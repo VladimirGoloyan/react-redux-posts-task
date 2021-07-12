@@ -1,0 +1,135 @@
+.app-posts {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+
+  &__main {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    &__container {
+      width: 70%;
+      margin: 1%;
+    }
+
+    &__search{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+
+      &__input{
+        padding: 8px;
+        margin: 12px;
+      }
+
+      &__button{
+        padding:8px;
+        margin: 12px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  &__columns {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      width: 80%;
+    }
+
+    &__buttons {
+      width: 50%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+
+  &__pagination {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    &__items {
+      width: 35%;
+
+      &__count {
+        margin: 8px;
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline black;
+        }
+      }
+    }
+
+    &__pages {
+      width: 35%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+    
+      &__item{
+        margin: 8px;
+        &:hover {
+          cursor: pointer;
+          color: darkblue;
+          text-decoration: underline darkblue;
+        }
+      }
+    }
+  }
+
+  &__modal{
+    width: 40%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    &__input{
+      padding: 8px;
+      margin: 12px;
+    }
+
+    &__button{
+      padding: 4px;
+      margin: 12px;
+    }
+  }
+
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

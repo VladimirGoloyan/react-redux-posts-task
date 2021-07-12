@@ -1,0 +1,15 @@
+@import "~styles/root";
+
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    &__main {
+        width: 90%;
+        background-color: cadetblue;
+        flex: 1;
+        padding-top: $header-size;
+    }
+}
