@@ -1,82 +1,46 @@
 import { actionTypesRedux } from "./actionTypesRedux.js";
-import ratingSorter from "utils/ratingSorter.js";
 
 const reducer = (state = null, action) => {
   switch (action.type) {
-    case actionTypesRedux.SET_CURRENT_POSTS:
+    case actionTypesRedux.SET_POSTS:
       console.log(action);
-      console.log("State :", state);
-      return [action.payload.posts, state[1], state[2]];
+      return { ...state, posts: action.payload.posts };
 
     case actionTypesRedux.ADD_POST_TO_COLUMN:
-      console.log(action);
-      console.log("State :", state);
-      let colPosts = state[action.payload.column];
-      colPosts.posts.push(action.payload.postToAdd);
-      if (action.payload.column === 1) return [state[0], colPosts, state[2]];
-      return [state[0], state[1], colPosts];
-
-    case actionTypesRedux.RATING_SORT:
-      console.log(action);
-      console.log("State :", state);
-      let sortPosts = state[action.payload.column].posts;
-      let ratings = sortPosts.map((el) => {
-        let average = 0;
-
-        el.comments.forEach((el) => {
-          average += el.rating;
-        });
-
-        return (average / el.comments.length).toFixed(2);
-      });
-
-      let arrOfObj = ratings;
-
-      for (let i = 0; i < ratings.length; i++) {
-        arrOfObj[i] = { ratingAverage: ratings[i] };
-      }
-
-      if (!action.payload.sortDir) {
-        arrOfObj.sort((a, b) => {
-          if (a.ratingAverage > b.ratingAverage) {
-            return -1;
-          } else if (a.ratingAverage < b.ratingAverage) {
-            return 1;
+      return {
+        ...state,
+        posts: state.posts.map((el) => {
+          if (el.id === action.payload.postId) {
+            if (action.payload.column === 1) return { ...el, selected: "left" };
+            return { ...el, selected: "right" };
           }
-          return 0;
-        });
-      }
+          return el;
+        }),
+      };
 
-      arrOfObj.sort((a, b) => {
-        if (a.ratingAverage > b.ratingAverage) {
-          return 1;
-        } else if (a.ratingAverage < b.ratingAverage) {
-          return -1;
-        }
-        return 0;
-      });
-
-      if (action.payload.column === 1) return [state[0], {...state[1], columnPosts:arrOfObj}, state[2]];
-      return [state[0], state[1], {...state[1], columnPosts:arrOfObj}];
+    case actionTypesRedux.REMOVE_POST_FROM_COLUMN:
+      return {
+        ...state,
+        posts: state.posts.map((el) => {
+          if (el.id === action.payload.postId) {
+            return { ...el, selected: "" };
+          }
+          return el;
+        }),
+      };
 
     case actionTypesRedux.SEARCH_POSTS:
-      console.log(action);
-      console.log("State :", state);
-      return [action.payload.posts, state[1], state[2]];
+      return { ...state, posts: action.payload.posts };
 
     case actionTypesRedux.ADD_COMMENT:
-      console.log(action);
-      console.log("State :", state);
-      let posts = state[0].map((el) => {
-        if (el.id === action.payload.post.id) return action.payload.post;
+      let posts = state.posts.map((el) => {
+        if (el.id === action.payload.postId) return action.payload.post;
         return el;
       });
-      return [posts, state[1], state[2]];
+      return { ...state, posts };
 
     case actionTypesRedux.ADD_REPLY:
-      console.log(action);
-      console.log("State:", state);
-      let newPosts = state[0].map((el) => {
+      let newPosts = state.posts.map((el) => {
         if (el.id === action.payload.postId) {
           el.comments.map((el) => {
             if (el.id === action.payload.comment.id) {
@@ -88,9 +52,14 @@ const reducer = (state = null, action) => {
         }
         return el;
       });
-      console.log("Posts with reply :", newPosts);
-      console.log(state[1]);
-      return [newPosts, state[1], state[2]];
+
+      return { ...state, posts: newPosts };
+
+    case actionTypesRedux.CHANGE_PAGE:
+      return { ...state, currentPage: action.payload.page };
+
+    case actionTypesRedux.CHANGE_POSTS_PER_PAGE:
+      return { ...state, postsPerPage: action.payload.count };
 
     default:
       return state;

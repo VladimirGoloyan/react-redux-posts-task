@@ -12,7 +12,8 @@ const postsMockup = [
       { body: "facere repellat provident", id: 1, reply: "", rating: 5 },
     ],
     body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    added: false,
+    selected:"",
+    
   },
   {
     userId: 1,
@@ -25,7 +26,7 @@ const postsMockup = [
       { body: "strum rerum est autem s", id: 2, reply: "", rating: 1 },
     ],
     body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    added: false,
+    selected:"",
   },
   {
     userId: 1,
@@ -38,7 +39,7 @@ const postsMockup = [
       { body: "ae ut reiciendis\nqui aperiam no", id: 3, reply: "", rating: 5 },
     ],
     body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-    added: false,
+    selected:"",
   },
   {
     userId: 1,
@@ -46,7 +47,7 @@ const postsMockup = [
     title: "ea molestias quasi exercitationem repellat qui ipsa sit aut",
     comments: [{ body: "sed quo iure\nvoluptat", id: 0, reply: "", rating: 2.7 }],
     body: "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
-    added: false,
+    selected:"",
   },
   {
     userId: 1,
@@ -54,7 +55,7 @@ const postsMockup = [
     title: "eum et est occaecati",
     comments: [{ body: "facere repellat provident", id: 1, reply: "", rating: 4.7 }],
     body: "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit",
-    added: false,
+    selected:"",
   },
   {
     userId: 1,
@@ -62,7 +63,7 @@ const postsMockup = [
     title: "nesciunt quas odio",
     comments: [{ body: "quaerat sunt sed\nalias ", id: 2, reply: "", rating: 4.2 }],
     body: "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque",
-    added: false,
+    selected:"",
   },
 ];
 

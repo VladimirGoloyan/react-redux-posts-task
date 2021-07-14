@@ -20,7 +20,14 @@ const PostMain = (props) => {
   };
 
   const commentAdder = () => {
-    props.addComment(state.commentVal, props.post.id);
+    let post = props.posts.find((el) => el.id === props.post.id);
+    post.comments.push({
+      body: state.commentVal,
+      reply: "",
+      id: post.comments.length,
+      rating: Math.random() * 5,
+    });
+    props.addComment(post, props.post.id);
     setState({ ...state, commentVal: "" });
   };
 
@@ -61,7 +68,9 @@ const PostMain = (props) => {
       </Modal>
       <div className={props.className}>
         <div
-          className={props.post.added ? "app-post-disabled" : "app-post-body"}
+          className={
+            props.post.selected ? "app-post-disabled" : "app-post-body"
+          }
         >
           <h2>{props.post.title}</h2>
           <hr />
@@ -70,10 +79,7 @@ const PostMain = (props) => {
         {props.post.comments.map((el, idx) => {
           return (
             <div key={idx}>
-              <div
-                
-                className="app-post-comment"
-              >
+              <div className="app-post-comment">
                 <p className="app-post-comment__body">{el.body}</p>
                 <StarRatings
                   className="app-post-comment__rating"

@@ -2,64 +2,33 @@ import { actionTypesRedux } from "../reducers/actionTypesRedux";
 
 import postsMockup from "data-mockup/posts-mockup";
 
-let posts = postsMockup;
-
-export const setCurrentPosts = (page, postsPerPage) => (dispatch) => {
-  let posts = postsMockup.slice((page - 1) * postsPerPage, page * postsPerPage);
+export const setPosts = (posts) => (dispatch) => {
   dispatch({
-    type: actionTypesRedux.SET_CURRENT_POSTS,
+    type: actionTypesRedux.SET_POSTS,
     payload: { posts },
   });
 };
 
-export const ratingSorter = (column, direction) => (dispatch) => {
-  dispatch({
-    type:actionTypesRedux.RATING_SORT,
-    payload:{
-      column,
-      direction
-    }
-  })
-}
-
-export const addPostToColumn = (column) => (dispatch) => {
-  let postRev = posts.slice().reverse();
-  let postToAdd = postRev.find((el) => {
-    if (!el.added) {
-      return el;
-    }
-  });
-
-  if (!postToAdd) {
-    console.log("No more posts to add");
-    return;
-  }
-
-  posts.forEach((el) => {
-        if (el.id === postToAdd.id) {
-          el.added = true;
-        }
-        return el;
-      });
-
+export const addPostToColumn = (column, postId) => (dispatch) => {
   dispatch({
     type: actionTypesRedux.ADD_POST_TO_COLUMN,
     payload: {
-      postToAdd,
+      postId,
       column,
     },
   });
 };
 
-export const searchPosts = (value) => (dispatch) => {
-  let posts = postsMockup.filter((el) => {
-    if (el.body.includes(value) || el.title.includes(value)) {
-      return el;
-    }
-    el.comments.map((el) => {
-      if (el.body.includes(value)) return el;
-    });
+export const removePostFromColumn = (postId) => (dispatch) => {
+  dispatch({
+    type: actionTypesRedux.REMOVE_POST_FROM_COLUMN,
+    payload: {
+      postId,
+    },
   });
+};
+
+export const searchPosts = (posts) => (dispatch) => {
   dispatch({
     type: actionTypesRedux.SEARCH_POSTS,
     payload: {
@@ -68,18 +37,12 @@ export const searchPosts = (value) => (dispatch) => {
   });
 };
 
-export const addComment = (value, postId) => (dispatch) => {
-  let post = postsMockup.find((el) => el.id === postId);
-  post.comments.push({
-    body: value,
-    reply: "",
-    id: post.comments.length,
-    rating: Math.random() * 5,
-  });
+export const addComment = (post, postId) => (dispatch) => {
   dispatch({
     type: actionTypesRedux.ADD_COMMENT,
     payload: {
       post,
+      postId,
     },
   });
 };
@@ -95,5 +58,19 @@ export const addReply = (value, postId, commentId) => (dispatch) => {
       comment,
       postId,
     },
+  });
+};
+
+export const postsPerPageChanger = (count) => (dispatch) => {
+  dispatch({
+    type: actionTypesRedux.CHANGE_POSTS_PER_PAGE,
+    payload: { count },
+  });
+};
+
+export const pageChanger = (page) => (dispatch) => {
+  dispatch({
+    type: actionTypesRedux.CHANGE_PAGE,
+    payload: { page },
   });
 };

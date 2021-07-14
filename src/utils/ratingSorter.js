@@ -1,23 +1,12 @@
-import averageCalculator from "./averageCalculator";
 
 const ratingSorter = (arr, dir) => {
-  console.log('arr: ',arr)
-  let ratings = arr.map((el) => {
-    return averageCalculator(el.comments);
-  });
-
-  let arrOfObj = arr;
-
-  for (let i = 0; i < arr.length; i++) {
-    arrOfObj[i].ratingAverage = ratings[i];
-  }
-
+  if (arr === []) return arr;
   //if direction is true sorting in descending order
   if (!dir) {
-    arrOfObj.sort((a, b) => {
-      if (a.ratingAverage > b.ratingAverage) {
+    let arrOfObj = arr.sort((a, b) => {
+      if (a.average > b.average) {
         return -1;
-      } else if (a.ratingAverage < b.ratingAverage) {
+      } else if (a.average < b.average) {
         return 1;
       }
       return 0;
@@ -26,10 +15,10 @@ const ratingSorter = (arr, dir) => {
   }
 
   //otherwise ascending order
-  arrOfObj.sort((a, b) => {
-    if (a.ratingAverage > b.ratingAverage) {
+  let arrOfObj = arr.sort((a, b) => {
+    if (a.average > b.average) {
       return 1;
-    } else if (a.ratingAverage < b.ratingAverage) {
+    } else if (a.average < b.average) {
       return -1;
     }
     return 0;
